@@ -308,11 +308,11 @@ function Index() {
           <a className="transition-colors hover:text-foreground" href="#trabalho">
             Trabalho
           </a>
-          <a className="transition-colors hover:text-foreground" href="#projetos">
-            Projetos
-          </a>
           <a className="transition-colors hover:text-foreground" href="#experiencia">
             Experiência
+          </a>
+          <a className="transition-colors hover:text-foreground" href="#projetos">
+            Projetos
           </a>
           <a className="transition-colors hover:text-foreground" href="#competencias">
             Competências
@@ -527,6 +527,36 @@ function Index() {
           </div>
         </section>
 
+        <section id="experiencia" data-reveal className="py-10">
+          <div className="mb-6 flex items-end justify-between gap-4">
+            <h2 className="font-display text-2xl font-semibold tracking-tight">Experiência</h2>
+            <span className="hidden font-mono text-xs text-muted-foreground sm:block">
+              abr/2021 — atual
+            </span>
+          </div>
+          <ol className="grid gap-6 md:grid-cols-2">
+            {EXPERIENCE.map((job) => (
+              <li key={job.company} className="pane rounded-2xl p-6">
+                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                  <h3 className="font-display text-lg font-semibold">{job.company}</h3>
+                  <p className="font-mono text-xs text-muted-foreground">{job.period}</p>
+                </div>
+                <p className="mt-1 font-mono text-xs tracking-wide text-pass">{job.role}</p>
+                <p className="mt-3 text-sm leading-relaxed text-foreground text-pretty">
+                  {job.context}
+                </p>
+                <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-muted-foreground marker:text-rim">
+                  {job.highlights.map((highlight) => (
+                    <li key={highlight} className="text-pretty">
+                      {highlight}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            ))}
+          </ol>
+        </section>
+
         <section id="projetos" data-reveal className="py-10">
           <div className="mb-6 flex items-end justify-between gap-4">
             <h2 className="font-display text-2xl font-semibold tracking-tight">Projetos</h2>
@@ -573,36 +603,6 @@ function Index() {
               </article>
             ))}
           </div>
-        </section>
-
-        <section id="experiencia" data-reveal className="py-10">
-          <div className="mb-6 flex items-end justify-between gap-4">
-            <h2 className="font-display text-2xl font-semibold tracking-tight">Experiência</h2>
-            <span className="hidden font-mono text-xs text-muted-foreground sm:block">
-              abr/2021 — atual
-            </span>
-          </div>
-          <ol className="grid gap-6 md:grid-cols-2">
-            {EXPERIENCE.map((job) => (
-              <li key={job.company} className="pane rounded-2xl p-6">
-                <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
-                  <h3 className="font-display text-lg font-semibold">{job.company}</h3>
-                  <p className="font-mono text-xs text-muted-foreground">{job.period}</p>
-                </div>
-                <p className="mt-1 font-mono text-xs tracking-wide text-pass">{job.role}</p>
-                <p className="mt-3 text-sm leading-relaxed text-foreground text-pretty">
-                  {job.context}
-                </p>
-                <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-muted-foreground marker:text-rim">
-                  {job.highlights.map((highlight) => (
-                    <li key={highlight} className="text-pretty">
-                      {highlight}
-                    </li>
-                  ))}
-                </ul>
-              </li>
-            ))}
-          </ol>
         </section>
 
         <section id="competencias" data-reveal className="grid gap-6 py-10 md:grid-cols-3">
