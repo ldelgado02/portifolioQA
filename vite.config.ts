@@ -8,7 +8,17 @@ export default defineConfig(async ({ command }): Promise<UserConfig> => {
   // nitro only produces the deploy bundle, so keep it out of the dev server.
   const buildPlugins =
     command === "build"
-      ? [(await import("nitro/vite")).nitro({ defaultPreset: "cloudflare-module" })]
+      ? [
+          (await import("nitro/vite")).nitro({
+            defaultPreset: "cloudflare-module",
+            // Must match the Worker name in the Cloudflare dashboard.
+            cloudflare: {
+              nodeCompat: true,
+              deployConfig: true,
+              wrangler: { name: "luis-delgado-qa", workers_dev: true },
+            },
+          }),
+        ]
       : [];
 
   return {
