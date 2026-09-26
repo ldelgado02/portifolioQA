@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Moon, Sun } from "lucide-react";
+import { Github, Linkedin, Moon, Sun } from "lucide-react";
 import { useEffect } from "react";
 
 import { toggleTheme } from "@/lib/theme";
@@ -354,6 +354,28 @@ function Index() {
               >
                 Baixar currículo
               </a>
+              <div className="flex items-center gap-2">
+                <a
+                  href={CONTACT.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn"
+                  title="LinkedIn"
+                  className="grid size-11 place-items-center rounded-full border border-input text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                >
+                  <Linkedin aria-hidden className="size-5" />
+                </a>
+                <a
+                  href={CONTACT.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub"
+                  title="GitHub"
+                  className="grid size-11 place-items-center rounded-full border border-input text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground"
+                >
+                  <Github aria-hidden className="size-5" />
+                </a>
+              </div>
             </div>
           </div>
 
@@ -580,12 +602,32 @@ function Index() {
               <p className="mx-auto mt-3 max-w-md text-muted-foreground text-pretty">
                 {CONTACT.email} · São Paulo, SP
               </p>
-              <a
-                href={`mailto:${CONTACT.email}`}
-                className="mt-6 inline-block rounded-full bg-foreground px-7 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90"
-              >
-                Entrar em contato
-              </a>
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+                <a
+                  href={`mailto:${CONTACT.email}`}
+                  className="rounded-full bg-foreground px-7 py-3 text-sm font-semibold text-background transition-opacity hover:opacity-90"
+                >
+                  Entrar em contato
+                </a>
+                <a
+                  href={CONTACT.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-input px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+                >
+                  <Linkedin aria-hidden className="size-4" />
+                  LinkedIn
+                </a>
+                <a
+                  href={CONTACT.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-full border border-input px-6 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+                >
+                  <Github aria-hidden className="size-4" />
+                  GitHub
+                </a>
+              </div>
             </div>
           </div>
         </section>
