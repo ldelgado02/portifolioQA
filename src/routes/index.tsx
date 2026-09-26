@@ -89,13 +89,76 @@ const REPOSITORIES = [
   {
     title: "Desafio técnico de automação — Inmetrics",
     summary:
-      "Automação de testes Web e de API feita para o processo seletivo da Inmetrics, sobre o site Automation Exercise e a API pública do Trello.",
-    highlights: [
-      "30 cenários em Gherkin: 13 Web (login, busca, carrinho e checkout) e 17 de API.",
-      "Page Object Model na interface e Service Object nas chamadas de API.",
-      "Massa de dados gerada com Faker e contas criadas via API excluídas automaticamente ao fim de cada cenário.",
-      "Anúncios de terceiros bloqueados com cy.intercept para estabilizar os testes, sem desligar a segurança do navegador.",
-      "Relatórios de execução com Allure.",
+      "Automação de testes Web e de API feita para o processo seletivo da Inmetrics: 30 cenários em Gherkin sobre o site Automation Exercise, a API de prática do próprio site e a API pública do Trello.",
+    planning: [
+      {
+        step: "BDD com Cucumber",
+        detail:
+          "Cenários escritos em Gherkin, em linguagem natural, para ficarem legíveis, organizados e reutilizáveis.",
+      },
+      {
+        step: "Mapeamento dos cenários",
+        detail:
+          "Fluxos principais e alternativos de login, busca, carrinho e API escritos nas features antes de qualquer código.",
+      },
+      {
+        step: "Step definitions",
+        detail: "Implementação de cada linha das features.",
+      },
+      {
+        step: "Page Object Model",
+        detail:
+          "Refatoração que separou seletores e ações de cada página em classes próprias, deixando os steps mais limpos.",
+      },
+      {
+        step: "Variáveis de ambiente",
+        detail:
+          "Credenciais e o ID da action do Trello movidos para o .env, fora das features e dos steps.",
+      },
+      {
+        step: "Relatório com Allure",
+        detail: "Relatórios de execução para visualizar os resultados.",
+      },
+      {
+        step: "Service Object na API",
+        detail:
+          "Chamadas de API centralizadas em serviços, com a mesma lógica de organização do POM.",
+      },
+    ],
+    coverage: [
+      {
+        area: "Login e cadastro",
+        count: 5,
+        detail:
+          "Credenciais válidas e inválidas, e-mail não cadastrado, logout e cadastro com dados únicos.",
+      },
+      {
+        area: "Busca de produtos",
+        count: 4,
+        detail: "Produto existente e inexistente, termo vazio e busca sem diferenciar maiúsculas.",
+      },
+      {
+        area: "Carrinho e checkout",
+        count: 4,
+        detail: "Inclusão, quantidade e valor total, conferência no checkout e remoção.",
+      },
+      {
+        area: "API do Trello",
+        count: 13,
+        detail:
+          "Status, estrutura do JSON, tipos, datas ISO 8601, tempo de resposta e headers; negativos com 404.",
+      },
+      {
+        area: "API de login e de contas",
+        count: 4,
+        detail: "Verificação de login e criação de conta na API do Automation Exercise.",
+      },
+    ],
+    decisions: [
+      "Massa de dados em três camadas: DataFactory gera com Faker, DataProvider escolhe entre dado real do .env e dado gerado, e DataCleaner exclui as contas criadas via API no afterEach, mesmo se o teste falhar.",
+      "A API de login do Automation Exercise sempre responde HTTP 200, com o código real dentro do JSON; os testes validam o campo responseCode em vez do status HTTP.",
+      "Anúncios de terceiros quebravam a execução; foram bloqueados com cy.intercept em vez de desligar o chromeWebSecurity, mantendo a proteção do navegador.",
+      "Scripts npm para rodar cada feature separadamente e um comando que limpa, executa e abre o relatório Allure.",
     ],
     tags: ["Cypress", "Cucumber/Gherkin", "JavaScript", "Page Object Model", "Faker", "Allure"],
     meta: "processo seletivo · jul — ago/2026",
@@ -564,32 +627,14 @@ function Index() {
               código aberto no GitHub
             </span>
           </div>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6">
             {REPOSITORIES.map((repo) => (
-              <article key={repo.url} className="pane flex flex-col rounded-2xl p-6">
-                <h3 className="font-display text-lg font-semibold">{repo.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-foreground text-pretty">
-                  {repo.summary}
-                </p>
-                <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-muted-foreground marker:text-rim">
-                  {repo.highlights.map((highlight) => (
-                    <li key={highlight} className="text-pretty">
-                      {highlight}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-4 mb-4 flex flex-wrap gap-2">
-                  {repo.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full bg-secondary px-2.5 py-1 font-mono text-xs text-secondary-foreground"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-                <div className="mt-auto flex flex-wrap items-center justify-between gap-3 border-t border-hairline pt-4">
-                  <p className="font-mono text-[11px] text-muted-foreground">{repo.meta}</p>
+              <article key={repo.url} className="pane rounded-2xl p-6 md:p-8">
+                <div className="flex flex-wrap items-start justify-between gap-4">
+                  <div>
+                    <h3 className="font-display text-xl font-semibold">{repo.title}</h3>
+                    <p className="mt-1 font-mono text-[11px] text-muted-foreground">{repo.meta}</p>
+                  </div>
                   <a
                     href={repo.url}
                     target="_blank"
@@ -599,6 +644,81 @@ function Index() {
                     <Github aria-hidden className="size-4" />
                     Ver no GitHub
                   </a>
+                </div>
+                <p className="mt-4 max-w-3xl text-sm leading-relaxed text-foreground text-pretty">
+                  {repo.summary}
+                </p>
+
+                <div className="mt-6 grid gap-8 lg:grid-cols-2">
+                  <div>
+                    <h4 className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
+                      Planejamento
+                    </h4>
+                    <ol className="mt-3 space-y-3">
+                      {repo.planning.map((item, index) => (
+                        <li key={item.step} className="flex gap-3 text-sm leading-relaxed">
+                          <span className="font-mono text-xs text-pass tabular-nums">
+                            {String(index + 1).padStart(2, "0")}
+                          </span>
+                          <p className="text-pretty">
+                            <span className="font-semibold text-foreground">{item.step}.</span>{" "}
+                            <span className="text-muted-foreground">{item.detail}</span>
+                          </p>
+                        </li>
+                      ))}
+                    </ol>
+                  </div>
+
+                  <div className="space-y-8">
+                    <div>
+                      <h4 className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
+                        Cobertura · {repo.coverage.reduce((total, item) => total + item.count, 0)}{" "}
+                        cenários
+                      </h4>
+                      <dl className="mt-3 space-y-3">
+                        {repo.coverage.map((item) => (
+                          <div
+                            key={item.area}
+                            className="border-t border-hairline pt-3 first:border-t-0 first:pt-0"
+                          >
+                            <dt className="flex items-baseline justify-between gap-3 text-sm font-semibold text-foreground">
+                              {item.area}
+                              <span className="rounded-full bg-pass-soft px-2 py-0.5 font-mono text-[11px] font-medium text-pass">
+                                {item.count} {item.count === 1 ? "cenário" : "cenários"}
+                              </span>
+                            </dt>
+                            <dd className="mt-1 text-sm leading-relaxed text-muted-foreground text-pretty">
+                              {item.detail}
+                            </dd>
+                          </div>
+                        ))}
+                      </dl>
+                    </div>
+
+                    <div>
+                      <h4 className="font-mono text-[11px] tracking-[0.14em] text-muted-foreground uppercase">
+                        Decisões técnicas
+                      </h4>
+                      <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed text-muted-foreground marker:text-rim">
+                        {repo.decisions.map((decision) => (
+                          <li key={decision} className="text-pretty">
+                            {decision}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 flex flex-wrap gap-2 border-t border-hairline pt-4">
+                  {repo.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full bg-secondary px-2.5 py-1 font-mono text-xs text-secondary-foreground"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </article>
             ))}
