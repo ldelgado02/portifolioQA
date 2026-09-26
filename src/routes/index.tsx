@@ -11,7 +11,7 @@ import workMobile from "@/assets/work-mobile.jpg";
 const CONTACT = {
   email: "luisgustavo220602@gmail.com",
   linkedin: "https://www.linkedin.com/in/luis-gustavo-qa-automation",
-  github: "https://github.com/DelgadoQA-sys",
+  github: "https://github.com/ldelgado02",
 };
 
 const CV_URL = "/cv-luis-gustavo-delgado.pdf";

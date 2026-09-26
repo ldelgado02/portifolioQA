@@ -16,4 +16,4 @@ bun run build
 
 - E-mail: luisgustavo220602@gmail.com
 - LinkedIn: https://www.linkedin.com/in/luis-gustavo-qa-automation
-- GitHub: https://github.com/DelgadoQA-sys
+- GitHub: https://github.com/ldelgado02
