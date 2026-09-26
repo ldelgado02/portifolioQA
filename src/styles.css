@@ -3,6 +3,7 @@
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
+@custom-variant light (&:where([data-theme="light"], [data-theme="light"] *));
 
 /*
  * Design system — "quality report" register.
@@ -124,6 +125,52 @@
     radial-gradient(120% 140% at 12% 0%, oklch(0.802 0.158 154 / 12%), transparent 58%),
     radial-gradient(110% 130% at 92% 100%, oklch(0.742 0.074 209 / 11%), transparent 62%);
   --gradient-mark: linear-gradient(150deg, var(--pass), var(--rim));
+
+  color-scheme: dark;
+}
+
+/*
+ * Light register — opt-in via the header toggle (data-theme="light" on <html>).
+ * Same roles as the dark tokens: paper surface, a deeper signal green so it
+ * keeps text contrast on white, and the teal rim for secondary accents.
+ */
+:root[data-theme="light"] {
+  --ink: oklch(0.975 0.005 258);
+  --ink-2: oklch(0.945 0.008 258);
+
+  --pass: oklch(0.54 0.15 154);
+  --pass-soft: oklch(0.54 0.15 154 / 12%);
+  --rim: oklch(0.52 0.08 209);
+  --rim-soft: oklch(0.52 0.08 209 / 12%);
+  --warn: oklch(0.62 0.14 76);
+
+  --hairline: oklch(0.25 0.02 258 / 11%);
+  --surface: oklch(1 0 0 / 72%);
+  --surface-strong: oklch(1 0 0 / 88%);
+
+  --foreground: oklch(0.2 0.02 258);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.02 258);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.02 258);
+  --primary-foreground: oklch(0.99 0.004 154);
+  --secondary: var(--ink-2);
+  --secondary-foreground: oklch(0.3 0.02 258);
+  --muted: oklch(0.93 0.008 258);
+  --muted-foreground: oklch(0.46 0.02 258);
+  --accent-foreground: oklch(0.99 0.004 209);
+  --input: oklch(0.25 0.02 258 / 18%);
+  --ring: oklch(0.54 0.15 154 / 55%);
+  --sidebar-foreground: oklch(0.2 0.02 258);
+  --sidebar-primary-foreground: oklch(0.99 0.004 154);
+  --sidebar-accent: oklch(0.93 0.008 258);
+  --sidebar-accent-foreground: oklch(0.2 0.02 258);
+
+  --gradient-panel:
+    radial-gradient(120% 140% at 12% 0%, oklch(0.54 0.15 154 / 10%), transparent 58%),
+    radial-gradient(110% 130% at 92% 100%, oklch(0.52 0.08 209 / 9%), transparent 62%);
+
+  color-scheme: light;
 }
 
 .dark {

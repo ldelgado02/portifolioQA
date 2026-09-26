@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Moon, Sun } from "lucide-react";
 import { useEffect } from "react";
+
+import { toggleTheme } from "@/lib/theme";
 
 import heroCover from "@/assets/hero-cover.jpg";
 import workSuite from "@/assets/work-suite.jpg";
@@ -280,7 +283,7 @@ function Index() {
             Luis Gustavo Delgado
           </span>
         </a>
-        <nav className="hidden items-center gap-8 text-sm font-medium text-muted-foreground lg:flex">
+        <nav className="hidden items-center gap-8 text-sm font-medium text-muted-foreground lg:ml-auto lg:flex">
           <a className="transition-colors hover:text-foreground" href="#metricas">
             Métricas
           </a>
@@ -305,6 +308,16 @@ function Index() {
             Currículo
           </a>
         </nav>
+        <button
+          type="button"
+          onClick={toggleTheme}
+          aria-label="Alternar entre tema claro e escuro"
+          title="Alternar entre tema claro e escuro"
+          className="grid size-9 shrink-0 place-items-center rounded-full border border-input text-muted-foreground transition-colors hover:bg-secondary hover:text-foreground lg:-ml-2"
+        >
+          <Sun aria-hidden className="size-4 light:hidden" />
+          <Moon aria-hidden className="hidden size-4 light:block" />
+        </button>
       </header>
 
       <main className="relative z-10 mx-auto max-w-6xl px-6">
