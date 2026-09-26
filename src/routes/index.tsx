@@ -85,6 +85,24 @@ const PROJECTS = [
   },
 ];
 
+const REPOSITORIES = [
+  {
+    title: "Desafio técnico de automação — Inmetrics",
+    summary:
+      "Automação de testes Web e de API feita para o processo seletivo da Inmetrics, sobre o site Automation Exercise e a API pública do Trello.",
+    highlights: [
+      "30 cenários em Gherkin: 13 Web (login, busca, carrinho e checkout) e 17 de API.",
+      "Page Object Model na interface e Service Object nas chamadas de API.",
+      "Massa de dados gerada com Faker e contas criadas via API excluídas automaticamente ao fim de cada cenário.",
+      "Anúncios de terceiros bloqueados com cy.intercept para estabilizar os testes, sem desligar a segurança do navegador.",
+      "Relatórios de execução com Allure.",
+    ],
+    tags: ["Cypress", "Cucumber/Gherkin", "JavaScript", "Page Object Model", "Faker", "Allure"],
+    meta: "processo seletivo · jul — ago/2026",
+    url: "https://github.com/ldelgado02/inmetrics",
+  },
+];
+
 const EXPERIENCE = [
   {
     company: "Stellar Gaming (EstrelaBet e Vupi)",
@@ -283,12 +301,15 @@ function Index() {
             Luis Gustavo Delgado
           </span>
         </a>
-        <nav className="hidden items-center gap-8 text-sm font-medium text-muted-foreground lg:ml-auto lg:flex">
+        <nav className="hidden items-center gap-5 text-sm font-medium text-muted-foreground lg:ml-auto lg:flex xl:gap-8">
           <a className="transition-colors hover:text-foreground" href="#metricas">
             Métricas
           </a>
           <a className="transition-colors hover:text-foreground" href="#trabalho">
             Trabalho
+          </a>
+          <a className="transition-colors hover:text-foreground" href="#projetos">
+            Projetos
           </a>
           <a className="transition-colors hover:text-foreground" href="#experiencia">
             Experiência
@@ -501,6 +522,54 @@ function Index() {
                 <p className="mt-4 border-t border-hairline pt-3 font-mono text-[11px] text-muted-foreground">
                   {project.meta}
                 </p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="projetos" data-reveal className="py-10">
+          <div className="mb-6 flex items-end justify-between gap-4">
+            <h2 className="font-display text-2xl font-semibold tracking-tight">Projetos</h2>
+            <span className="hidden font-mono text-xs text-muted-foreground sm:block">
+              código aberto no GitHub
+            </span>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {REPOSITORIES.map((repo) => (
+              <article key={repo.url} className="pane flex flex-col rounded-2xl p-6">
+                <h3 className="font-display text-lg font-semibold">{repo.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-foreground text-pretty">
+                  {repo.summary}
+                </p>
+                <ul className="mt-3 list-disc space-y-1.5 pl-5 text-sm leading-relaxed text-muted-foreground marker:text-rim">
+                  {repo.highlights.map((highlight) => (
+                    <li key={highlight} className="text-pretty">
+                      {highlight}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-4 mb-4 flex flex-wrap gap-2">
+                  {repo.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full bg-secondary px-2.5 py-1 font-mono text-xs text-secondary-foreground"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                <div className="mt-auto flex flex-wrap items-center justify-between gap-3 border-t border-hairline pt-4">
+                  <p className="font-mono text-[11px] text-muted-foreground">{repo.meta}</p>
+                  <a
+                    href={repo.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-input px-4 py-1.5 text-sm font-semibold text-foreground transition-colors hover:bg-secondary"
+                  >
+                    <Github aria-hidden className="size-4" />
+                    Ver no GitHub
+                  </a>
+                </div>
               </article>
             ))}
           </div>
