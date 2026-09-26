@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 import { toggleTheme } from "@/lib/theme";
 
-import heroCover from "@/assets/hero-cover.jpg";
+import profilePhoto from "@/assets/luis-gustavo-delgado.jpg";
 import workSuite from "@/assets/work-suite.jpg";
 import workMobile from "@/assets/work-mobile.jpg";
 
@@ -361,10 +361,10 @@ function Index() {
             <div className="pane -rotate-2 rounded-3xl p-5 transition-transform duration-500 hover:rotate-0">
               <div className="overflow-hidden rounded-2xl outline-1 -outline-offset-1 outline-hairline">
                 <img
-                  src={heroCover}
-                  alt="Ilustração abstrata de uma suíte de testes em execução, com marcações de aprovação em verde"
-                  width={1024}
-                  height={1280}
+                  src={profilePhoto}
+                  alt="Foto de Luis Gustavo Delgado sorrindo"
+                  width={960}
+                  height={1200}
                   className="aspect-4/5 w-full object-cover"
                 />
               </div>
