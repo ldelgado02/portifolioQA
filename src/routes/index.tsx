@@ -68,7 +68,7 @@ const PROJECTS = [
   },
   {
     image: workMobile,
-    title: "Qualidade em iGaming — Stellar Gaming",
+    title: "Qualidade em Sistema Web Desktop e Mobile — Stellar Gaming",
     problem:
       "Bugs chegando à produção nas plataformas de apostas EstrelaBet e Vupi, em Web desktop e Web mobile (iOS e Android), em uma empresa AI First.",
     actions: [
